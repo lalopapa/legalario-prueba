@@ -17,21 +17,16 @@ const WebCamCaptureController = ({setShowCamera, setPicture}) => {
     };
     return (
         <div className='flex flex-col gap-4 items-center'>
-            <div className='rounded-[50%] h-[300px] w-[200px] sm:h-[200px] overflow-hidden border'>
-                <div className='relative w-[400px]'>
-                    <div className='absolute -left-[52%]'>
-                        <Webcam
-                            ref={webcamRef}
-                            audio={false}
-                            height={450}
-                            width={600}
-                            screenshotFormat="image/jpeg"
-                            videoConstraints={videoConstraints}
-                        >
-                        </Webcam>
-                    </div>
-                </div>
-                
+            <div className='relative rounded-[50%] h-[300px] w-64 sm:h-[200px] overflow-hidden border'>
+                <Webcam
+                    ref={webcamRef}
+                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    audio={false}
+                    
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={videoConstraints}
+                >
+                </Webcam>
             </div>
             <div>
                 <button className='rounded-full border h-[40px] w-[40px]' onClick={capturePicture}></button>
