@@ -1,39 +1,24 @@
 import React, { useRef, useState, useCallback } from 'react';
 import Webcam from 'react-webcam';
+import WebCamCaptureController from './components/WebCamCaptureController';
 
 const App = () => {
-  const webcamRef = useRef(null);
-  const [url, setUrl] = useState(null);
-
-  const capturePhoto = useCallback(async () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setUrl(imageSrc);
-  }, [webcamRef]);
-
-  const videoConstraints = {
-    //width: 540,
-    facingMode: { exact: "user" }
-  };
+  const [picture, setPicture] = useState(null);
+  const [showCamera, setShowCamera] = useState(false)
   return (
-    <div>
-      <h3>Camera Feed</h3>
-      <Webcam
-        ref={webcamRef}
-        audio={false}
-        height={720}
-        screenshotFormat="image/jpeg"
-        width={1280}
-        videoConstraints={videoConstraints}
-      >
-       
-      </Webcam>
-      <button onClick={capturePhoto}>Capture</button>
-      <button onClick={() => setUrl(null)}>Refresh</button>
-      {url && (
-        <div>
-          <img src={url} alt="Screenshot" />
+    <div className='h-[100svh] flex justify-center items-center'>
+      { !showCamera ? 
+        <div className='p-4 flex flex-col gap-4 border'>
+          <div className=''>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 w-[120px]'>Subir archivo</button>
+          </div>
+          <div className=''>
+            <button onClick={()=>setShowCamera(!showCamera)} className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 w-[120px]'>Tomar foto</button>
+          </div>
         </div>
-      )}
+        :
+        <WebCamCaptureController /> 
+      }
     </div>
   );
 };
