@@ -11,8 +11,8 @@ const App = () => {
         <div className='h-[100svh] flex flex-col justify-center items-center'>
           <div>
             {picture && (
-                <div>
-                <img src={picture} alt="Screenshot" />
+                <div className='relative rounded-[50%] h-[300px] w-[200px] overflow-hidden border'>
+                  <img src={picture} className="absolute top-0 left-0 w-full h-full object-cover" alt="Screenshot" />
                 </div>
             )}
           </div>

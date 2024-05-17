@@ -17,12 +17,12 @@ const WebCamCaptureController = ({setShowCamera, setPicture}) => {
     };
     return (
         <div className='flex flex-col gap-4 items-center'>
-            <div className='relative rounded-[50%] h-[300px] w-64 sm:h-[200px] overflow-hidden border'>
+            <div className='relative rounded-[50%] h-[300px] w-[200px] overflow-hidden border'>
                 <Webcam
                     ref={webcamRef}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    forceScreenshotSourceSize
+                    className="absolute top-0 left-0 w-[200px] h-[300px] object-cover"
                     audio={false}
-                    
                     screenshotFormat="image/jpeg"
                     videoConstraints={videoConstraints}
                 >
