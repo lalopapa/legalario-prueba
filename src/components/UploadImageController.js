@@ -60,7 +60,7 @@ export default function UploadImageController(){
                 </div>
                 <div>
                     {files.imagen.file && (
-                        <div className="mt-4">
+                        <div className="mt-4 pb-4">
                             <img
                                 src={files.imagen.url}
                                 alt="Preview"

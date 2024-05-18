@@ -22,7 +22,6 @@ export default function UploadDocumentComponent(){
     const handleFileChange = (event)=>{
         const selectedFile = event.target.files[0];
         const reader = new FileReader();
-        console.log(selectedFile.type)
         if (selectedFile && (selectedFile.type === 'application/pdf' || selectedFile.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')){
             reader.onloadend = (e) => {  // e.target.result contains the data URL
                 updateFiles({
@@ -55,7 +54,7 @@ export default function UploadDocumentComponent(){
     return(
         <div className="w-full">
             <h2 className="font-bold text-center">Subir documento pdf o docx</h2>
-            <div className="flex flex-col h-[calc(100svh-120px)] items-center pb-4">
+            <div className="flex flex-col h-[calc(100svh-120px)] items-center">
                 <div className='flex flex-col items-center p-4 gap-4'>
                     {error && <div>
                         <span className="font-bold text-red-500">
@@ -72,7 +71,7 @@ export default function UploadDocumentComponent(){
                         />
                     </div>
                 </div>
-                {files.documento.file && <div className="self-center h-[500px] max-w-[600px] w-full border">
+                {files.documento.file && <div className="self-center h-[500px] max-w-[600px] w-full border pb-4 ">
                     <FileViewer
                         fileType={getTypeFile(files.documento.file)}
                         filePath={files.documento.url}
