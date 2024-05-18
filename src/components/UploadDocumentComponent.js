@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
-import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+//import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+import FileViewer from 'react-file-viewer';
+import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 
 export default function UploadDocumentComponent({ nextStep }){
     const fileInputRef = useRef(null);
@@ -20,13 +22,12 @@ export default function UploadDocumentComponent({ nextStep }){
         const reader = new FileReader();
 
         reader.onload = (e) => {
-            console.log(e.target.result)
+            //console.log(e.target.result)
             
-            setFilePreview(e.target.result); // e.target.result contains the data URL
+            setFilePreview({type, file:e.target.result }); // e.target.result contains the data URL
         };
 
         reader.readAsDataURL(selectedFile);
-
         
     }
     const docs = [
@@ -35,12 +36,18 @@ export default function UploadDocumentComponent({ nextStep }){
     return(
         <div className="w-full">
             <h2 className="text-center">1 de 4</h2>
-            <h2 className="font-bold">Subir documento PDF</h2>
+            <div className="flex justify-between">
+                <div>
+                    <span>Atras</span>
+                </div>
+                <div className=''>
+                    <ArrowRightCircleIcon className="size-6 text-blue-500" />
+                    <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 w-[150px] disabled:bg-[#ccc]" onClick={nextStep}>Siguiente</button>
+                </div>
+            </div>
+            <h2 className="font-bold text-center">Subir documento</h2>
+
             <div className="flex flex-col h-[calc(100svh-72px)] justify-center items-center">
-                {filePreview !== null && <div className="flex w-full">
-                    <iframe width={600} src={filePreview} title='SOME_TITLE' />
-                </div>}
-                
                 <div className='flex flex-col items-center p-4 gap-4'>
                     {error && <div>
                         <span className="font-bold">
@@ -56,10 +63,20 @@ export default function UploadDocumentComponent({ nextStep }){
                             onChange={handleFileChange}
                         />
                     </div>
-                    <div className=''>
-                        <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 w-[150px] disabled:bg-[#ccc]" onClick={nextStep}>Siguiente</button>
-                    </div>
+                    
                 </div>
+
+                {filePreview !== null && <div className="self-center h-[500px] w-[400px] border">
+                    <FileViewer
+                        key={1}
+                        fileType={filePreview.type}
+                        filePath={filePreview.file}
+                        //errorComponent={CustomErrorComponent}
+                        onError={(e)=>{console.log(e, 'error in file-viewer')}}
+                        />
+                </div>}
+                
+                
             </div>    
         </div>
     )
