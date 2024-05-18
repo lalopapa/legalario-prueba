@@ -1,32 +1,64 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useState } from 'react';
+import NavigationController from './components/NavigationController';
 import UploadDocumentComponent from './components/UploadDocumentComponent';
 import UploadImageController from './components/UploadImageController';
 import TakePictureComponent from './components/TakePictureComponent';
 import FinishProcessComponent from './components/FinishProcessComponent';
-const App = () => {
-  const [step, setStep] = useState(1);
+import FilesContext from './components/context/FilesContext';
 
+/* 
+  - Create FilesContext to handle files 
+  - Renders NavigationController
+  - Renders next steps
+    + UploadDocumentComponent
+    + UploadImageController
+    + TakePictureComponent
+      + WebCamCaptureController
+    + FinishProcessComponent
+*/
+
+const App = () => {
+  const filesDefaultValue = { // Giving default value to files status
+    documento:{file:null, url:null},
+    imagen:{file:null, url:null},
+    foto:{file:null, url:null}
+  }
+  const [files, setFiles] = useState(filesDefaultValue);
+  const [step, setStep] = useState(1);
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <UploadDocumentComponent nextStep={nextStep} />;
+        return <UploadDocumentComponent />;
       case 2:
-        return <UploadImageController nextStep={nextStep} prevStep={prevStep} />;
+        return <UploadImageController />;
       case 3:
-        return <TakePictureComponent nextStep={nextStep} />;
+        return <TakePictureComponent />;
       case 4:
-          return <FinishProcessComponent />;
+        return <FinishProcessComponent />;
       default:
-        return <UploadDocumentComponent nextStep={nextStep} />;
+        return <UploadDocumentComponent />;
     }
   };
-
+  const updateFiles = (files) => {
+    if(files === null){
+      setFiles(filesDefaultValue);
+    }else{
+      setFiles(files);
+    }
+  };
+  const StepCounter = ()=>{
+    return <h2 className="text-center">{step} de 4</h2>
+  } 
   return (   
-    <div className="bg-white p-6 w-full h-[100svh]">
-      {renderStep()}
+    <div className="bg-white px-3 py-6 md:p-6 w-full h-[100svh]">
+      <StepCounter/>
+      <FilesContext.Provider value={{ files,updateFiles }}>
+        <NavigationController step={step} nextStep={nextStep} prevStep={prevStep} />
+        {renderStep()}
+      </FilesContext.Provider>
     </div>
    
   );
