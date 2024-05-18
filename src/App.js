@@ -25,9 +25,9 @@ const App = () => {
   }
   const [files, setFiles] = useState(filesDefaultValue);
   const [step, setStep] = useState(1);
-  const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
-
+  const nextStep = () => setStep(step + 1);
+  
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -37,7 +37,7 @@ const App = () => {
       case 3:
         return <TakePictureComponent />;
       case 4:
-        return <FinishProcessComponent />;
+        return <FinishProcessComponent setStep={setStep} />; // Pass setStep to go back to step 1 when restart
       default:
         return <UploadDocumentComponent />;
     }

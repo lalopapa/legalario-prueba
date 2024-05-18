@@ -35,7 +35,7 @@ const WebCamCaptureController = ({setShowCamera, updateFiles}) => {
                 </Webcam>
             </div>
             <div>
-                <button className='rounded-full border h-[40px] w-[40px]' onClick={capturePicture}></button>
+                <button className='rounded-full border-[2px] bg-[#b2b1b1] h-[40px] w-[40px] outline outline-[#ccc]' onClick={capturePicture}></button>
             </div>
         </div>
     );

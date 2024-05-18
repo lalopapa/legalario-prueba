@@ -20,20 +20,20 @@ export default function UploadImageController(){
         fileInputRef.current.click();
       }
       const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file && (file.type === 'image/png' || file.type === 'image/jpeg')) {
+        const selectedFile = event.target.files[0];
+        if (selectedFile && (selectedFile.type === 'image/png' || selectedFile.type === 'image/jpeg')) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 updateFiles({
                     ...files, 
                     imagen:{
-                        file:file,
+                        file:selectedFile,
                         url:reader.result
                     }
                 });
                 setError('');
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(selectedFile);
         } else {
             setError('El archivo debe ser PNG o JPEG.');
         }
@@ -41,10 +41,10 @@ export default function UploadImageController(){
     return(
         <div className="w-full">
             <h2 className="font-bold text-center">Subir imagen png o jpeg</h2>
-            <div className="flex flex-col h-[calc(100svh-72px)]  items-center">
+            <div className="flex flex-col h-[calc(100svh-120px)]  items-center">
                 <div className='flex flex-col items-center p-4 gap-4'>
                     <div className=''>
-                        <button onClick={handleUploadFile} className=' hover:bg-[#ccc] text-[#ccc] hover:text-[#fff] border font-bold rounded p-2 w-[120px]'>Subir archivo</button>
+                        <button onClick={handleUploadFile} className=' hover:bg-[#ccc] text-[#ccc] hover:text-[#fff] border font-bold rounded p-2 min-w-[150px]'>Subir archivo</button>
                         <input
                             type="file"
                             ref={fileInputRef}
@@ -53,7 +53,7 @@ export default function UploadImageController(){
                         />
                     </div>
                     {error && <div>
-                        <span className="font-bold">
+                        <span className="font-bold text-red-500">
                             {error}
                         </span>
                     </div>}

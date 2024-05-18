@@ -22,16 +22,23 @@ export default function UploadDocumentComponent(){
     const handleFileChange = (event)=>{
         const selectedFile = event.target.files[0];
         const reader = new FileReader();
-        reader.onload = (e) => {  // e.target.result contains the data URL
-            updateFiles({
-                ...files, 
-                documento:{
-                    file:selectedFile,
-                    url:e.target.result
-                }
-            });
-        };
-        reader.readAsDataURL(selectedFile);
+        console.log(selectedFile.type)
+        if (selectedFile && (selectedFile.type === 'application/pdf' || selectedFile.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')){
+            reader.onloadend = (e) => {  // e.target.result contains the data URL
+                updateFiles({
+                    ...files, 
+                    documento:{
+                        file:selectedFile,
+                        url:e.target.result
+                    }
+                });
+                setError('');
+            };
+            reader.readAsDataURL(selectedFile);
+        }else{
+            setError('El archivo debe ser PDF o docx.');
+        }
+        
     }
     const getTypeFile = (file)=>{
         const typeArray = file.name.split("."); // splits string
@@ -41,15 +48,15 @@ export default function UploadDocumentComponent(){
     return(
         <div className="w-full">
             <h2 className="font-bold text-center">Subir documento</h2>
-            <div className="flex flex-col h-[calc(100svh-72px)] items-center">
+            <div className="flex flex-col h-[calc(100svh-120px)] items-center">
                 <div className='flex flex-col items-center p-4 gap-4'>
                     {error && <div>
-                        <span className="font-bold">
+                        <span className="font-bold text-red-500">
                             {error}
                         </span>
                     </div>}
                     <div >
-                        <button onClick={handleUploadFile} className=' hover:bg-[#ccc] text-[#ccc] hover:text-[#fff] border font-bold rounded p-2 w-[150px]'>Subir documento</button>
+                        <button onClick={handleUploadFile} className=' hover:bg-[#ccc] text-[#ccc] hover:text-[#fff] border font-bold rounded p-2 min-w-[150px]'>Subir documento</button>
                         <input
                             type="file"
                             ref={fileInputRef}

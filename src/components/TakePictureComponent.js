@@ -8,13 +8,13 @@ const TakePictureComponent = () => {
   
   return (
     <div className='w-full'>
-        <h2 className="font-bold text-center">Tomar fotografia</h2>
-        <div className='h-[100svh] flex flex-col  items-center'>
+        <h2 className="font-bold text-center">Tomar fotografía</h2>
+        <div className='h-[calc(100svh-120px)] flex flex-col  items-center'>
         { !showCamera ? 
-            <div className='h-[100svh] flex flex-col  items-center'>
+            <div className='flex flex-col  items-center'>
                 <div className='p-4 flex flex-col gap-4'>
                     <div className=''>
-                        <button onClick={()=>setShowCamera(!showCamera)} className='hover:bg-[#ccc] text-[#ccc] hover:text-[#fff] border font-bold rounded p-2 w-[120px]'>Tomar foto</button>
+                        <button onClick={()=>setShowCamera(!showCamera)} className='hover:bg-[#ccc] text-[#ccc] hover:text-[#fff] border font-bold rounded p-2 min-w-[150px]'>Tomar foto</button>
                     </div>
                 </div>
                 <div>

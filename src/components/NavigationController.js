@@ -16,7 +16,7 @@ export default function NavigationController({step, nextStep, prevStep}){
     const isSiguienteVisible = step < 4 ? true:false;
     
     return(
-        <div className="flex justify-between">
+        <div className="flex justify-between min-h-[24px]"> {/* Set to 24px to always occupy a space regardless visible or not */}
             <div className='w-[102px] '>
                 {isAtrasVisible  && <button onClick={prevStep} className="flex gap-x-1 justify-center items-center text-blue-500 disabled:text-[#ccc] font-bold rounded ">
                     <ArrowLeftIcon className="size-6 " />
