@@ -24,7 +24,7 @@ export default function NavigationController({step, nextStep, prevStep}){
                 </button> }
             </div>
             <div className='w-[102px]'>
-                {isSiguienteVisible  && <button disabled={!isSiguenteEnabled} onClick={nextStep} className="flex gap-x-1 justify-center items-center text-blue-500 disabled:text-[#ccc] font-bold rounded ">
+                {isSiguienteVisible  && <button disabled={!isSiguenteEnabled} onClick={nextStep} className="flex gap-x-1 justify-center items-center text-blue-500 disabled:text-[#ccc] disabled:cursor-not-allowed font-bold rounded ">
                     <span className="">Siguiente</span>
                     <ArrowRightIcon className="size-6 " />
                 </button> }

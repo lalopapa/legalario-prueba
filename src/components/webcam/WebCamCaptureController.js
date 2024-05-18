@@ -22,7 +22,7 @@ const WebCamCaptureController = ({setShowCamera, updateFiles}) => {
     };
     return (
         <div className='flex flex-col gap-4 items-center '>
-            <div className="py-4"><span className='font-bold '>Ajusta tu cara dentro del ovalo.</span></div>
+            <div className="py-4"><span className='font-bold '>Ajusta tu cara dentro del óvalo.</span></div>
             <div className='relative rounded-[50%] h-[300px] w-[200px] overflow-hidden border'>
                 <Webcam
                     ref={webcamRef}

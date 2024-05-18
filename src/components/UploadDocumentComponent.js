@@ -45,10 +45,17 @@ export default function UploadDocumentComponent(){
         const type = typeArray.pop(); // Substract last element in the array
         return type
     }
+    const CustomErrorComponent = ()=>{
+        return(
+            <div>
+                <span className="font-bold text-red-500">Error. Intentalo de nuevo.</span>
+            </div>
+        )
+    }
     return(
         <div className="w-full">
-            <h2 className="font-bold text-center">Subir documento</h2>
-            <div className="flex flex-col h-[calc(100svh-120px)] items-center">
+            <h2 className="font-bold text-center">Subir documento pdf o docx</h2>
+            <div className="flex flex-col h-[calc(100svh-120px)] items-center pb-4">
                 <div className='flex flex-col items-center p-4 gap-4'>
                     {error && <div>
                         <span className="font-bold text-red-500">
@@ -69,7 +76,7 @@ export default function UploadDocumentComponent(){
                     <FileViewer
                         fileType={getTypeFile(files.documento.file)}
                         filePath={files.documento.url}
-                        //errorComponent={CustomErrorComponent}
+                        errorComponent={CustomErrorComponent}
                         onError={(e)=>{console.log(e, 'error in file-viewer')}}
                         />
                 </div>}

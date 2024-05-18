@@ -9,7 +9,7 @@ const TakePictureComponent = () => {
   return (
     <div className='w-full'>
         <h2 className="font-bold text-center">Tomar fotografía</h2>
-        <div className='h-[calc(100svh-120px)] flex flex-col  items-center'>
+        <div className='h-[calc(100svh-120px)] flex flex-col  items-center pb-4'>
         { !showCamera ? 
             <div className='flex flex-col  items-center'>
                 <div className='p-4 flex flex-col gap-4'>
